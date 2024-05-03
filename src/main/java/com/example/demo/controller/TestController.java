@@ -31,13 +31,11 @@ public class TestController {
         return studentRepository.findAll();
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/student/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails){
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException("Student not exist with id :" + id));
-
         student.setName(studentDetails.getName());
-
         Student updatedStudent = studentRepository.save(student);
         return ResponseEntity.ok(updatedStudent);
     }
